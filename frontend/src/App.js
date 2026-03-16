@@ -1,53 +1,71 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { ThemeProvider } from 'next-themes';
+import { AppProvider, useApp } from '@/context/AppContext';
+import { Toaster } from '@/components/ui/sonner';
+import { Layout } from '@/components/Layout';
+import Login from '@/pages/Login';
+import Signup from '@/pages/Signup';
+import ProfileSetup from '@/pages/ProfileSetup';
+import Dashboard from '@/pages/Dashboard';
+import FoodLogging from '@/pages/FoodLogging';
+import NutritionDatabase from '@/pages/NutritionDatabase';
+import ExerciseTracking from '@/pages/ExerciseTracking';
+import MealRecommendations from '@/pages/MealRecommendations';
+import DailyDietPlan from '@/pages/DailyDietPlan';
+import ProgressTracking from '@/pages/ProgressTracking';
+import '@/App.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+/* Redirect to login if unauthenticated */
+function AuthGuard({ children }) {
+  const { isAuthenticated } = useApp();
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  return children;
+}
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
+/* Redirect authenticated users away from auth pages */
+function GuestGuard({ children }) {
+  const { isAuthenticated } = useApp();
+  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
+  return children;
+}
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+function AppRoutes() {
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
+    <Routes>
+      {/* Public routes */}
+      <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
+      <Route path="/signup" element={<GuestGuard><Signup /></GuestGuard>} />
+
+      {/* Protected profile setup (standalone page, no sidebar) */}
+      <Route path="/profile-setup" element={<AuthGuard><ProfileSetup /></AuthGuard>} />
+
+      {/* Protected routes with Layout (sidebar + navbar) */}
+      <Route element={<Layout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/food-logging" element={<FoodLogging />} />
+        <Route path="/nutrition-database" element={<NutritionDatabase />} />
+        <Route path="/exercise-tracking" element={<ExerciseTracking />} />
+        <Route path="/meal-recommendations" element={<MealRecommendations />} />
+        <Route path="/diet-plan" element={<DailyDietPlan />} />
+        <Route path="/progress" element={<ProgressTracking />} />
+      </Route>
+
+      {/* Catch-all redirect */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
   );
-};
+}
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+      <AppProvider>
+        <BrowserRouter>
+          <Toaster position="top-right" richColors />
+          <AppRoutes />
+        </BrowserRouter>
+      </AppProvider>
+    </ThemeProvider>
   );
 }
 
