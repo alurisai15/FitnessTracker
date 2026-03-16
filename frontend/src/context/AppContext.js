@@ -1,8 +1,32 @@
-import { createContext, useContext, useReducer, useCallback } from 'react';
+import { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
 
 const AppContext = createContext(null);
 
 const genId = () => Math.random().toString(36).substring(2, 11);
+
+/* Persist state to localStorage */
+const STORAGE_KEY = 'fittrack_state';
+
+const saveState = (state) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      isAuthenticated: state.isAuthenticated,
+      user: state.user,
+      profile: state.profile,
+      meals: state.meals,
+      exercises: state.exercises,
+      dailyGoal: state.dailyGoal,
+    }));
+  } catch (e) { /* ignore */ }
+};
+
+const loadState = () => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored);
+  } catch (e) { /* ignore */ }
+  return null;
+};
 
 /* Sample meals to pre-populate on login */
 const sampleMeals = {
@@ -29,7 +53,7 @@ const sampleExercises = [
   { id: genId(), name: 'Weight Training', duration: 45, caloriesBurned: 250 },
 ];
 
-const initialState = {
+const defaultState = {
   isAuthenticated: false,
   user: null,
   profile: null,
@@ -37,6 +61,8 @@ const initialState = {
   exercises: [],
   dailyGoal: 2200,
 };
+
+const initialState = loadState() || defaultState;
 
 function appReducer(state, action) {
   switch (action.type) {
@@ -49,7 +75,8 @@ function appReducer(state, action) {
         exercises: sampleExercises,
       };
     case 'LOGOUT':
-      return { ...initialState };
+      localStorage.removeItem(STORAGE_KEY);
+      return { ...defaultState };
     case 'SET_PROFILE':
       return { ...state, profile: action.payload };
     case 'ADD_MEAL': {
@@ -88,6 +115,13 @@ function appReducer(state, action) {
 
 export function AppProvider({ children }) {
   const [state, dispatch] = useReducer(appReducer, initialState);
+
+  /* Persist state to localStorage on every change */
+  useEffect(() => {
+    if (state.isAuthenticated) {
+      saveState(state);
+    }
+  }, [state]);
 
   const login = useCallback((email) => {
     dispatch({ type: 'LOGIN', payload: { name: 'Alex Johnson', email, avatar: null } });
