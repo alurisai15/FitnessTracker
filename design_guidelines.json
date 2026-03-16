@@ -1,0 +1,145 @@
+{
+  "project_name": "FitTrack",
+  "design_philosophy": {
+    "persona": "E1: The Anti-AI Designer",
+    "archetype": "The Performance Pro",
+    "core_vibe": "Elite Athleticism, Tactical Precision, High-Visibility, Disciplined",
+    "key_principles": [
+      "Fusion over Imitation: Mix finance precision with athletic grit.",
+      "Emotion First: Every interaction should feel motivating and powerful.",
+      "Content is King: Data is the hero. Legibility is paramount.",
+      "Negative Space: Use space to create focus, not just to fill gaps.",
+      "Contrast: High contrast for readability in dark mode. Light vs Dark."
+    ],
+    "anti_patterns": [
+      "No purple/teal generic SaaS gradients.",
+      "No 'Inter' for headings. Use 'Barlow Condensed'.",
+      "No centered layouts everywhere. Use asymmetry.",
+      "No low-contrast gray-on-gray text."
+    ]
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Barlow Condensed, sans-serif",
+      "body": "Manrope, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-6xl font-black tracking-tighter uppercase",
+      "h2": "text-4xl md:text-5xl font-bold tracking-tight uppercase",
+      "h3": "text-2xl md:text-3xl font-bold tracking-tight",
+      "body_lg": "text-lg leading-relaxed",
+      "body_base": "text-base leading-relaxed text-muted-foreground",
+      "caption": "text-sm font-medium tracking-wider uppercase text-muted-foreground"
+    },
+    "imports": [
+      "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;700;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    ]
+  },
+  "colors": {
+    "theme": "dark",
+    "palette": {
+      "background": "#09090B", 
+      "foreground": "#FAFAFA",
+      "card": "#121212", 
+      "card_foreground": "#FAFAFA",
+      "popover": "#121212",
+      "popover_foreground": "#FAFAFA",
+      "primary": "#2563EB", 
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#27272A",
+      "secondary_foreground": "#FAFAFA",
+      "muted": "#27272A", 
+      "muted_foreground": "#A1A1AA",
+      "accent": "#2563EB", 
+      "accent_foreground": "#FFFFFF",
+      "destructive": "#EF4444",
+      "destructive_foreground": "#FFFFFF",
+      "border": "#27272A", 
+      "input": "#27272A", 
+      "ring": "#2563EB" 
+    },
+    "chart_colors": {
+      "calories": "#2563EB",
+      "protein": "#10B981",
+      "carbs": "#F59E0B",
+      "fats": "#EF4444",
+      "weight": "#8B5CF6"
+    },
+    "gradients": {
+      "primary_glow": "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
+      "subtle_overlay": "linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0))"
+    },
+    "forbidden_colors": ["#7351B7", "#1B93A4"]
+  },
+  "spacing_layout": {
+    "spacing_scale": "Tailwind default but prioritized: p-6, p-8, p-12 for containers.",
+    "border_radius": "rounded-md",
+    "grid_system": {
+      "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6",
+      "bento_hero": "col-span-full md:col-span-8 lg:col-span-8 row-span-2",
+      "bento_side": "col-span-full md:col-span-4 lg:col-span-4 row-span-1"
+    },
+    "container_padding": "px-4 md:px-8 lg:px-12 py-8"
+  },
+  "visual_enhancers": {
+    "shadows": {
+      "card": "shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_4px_6px_-1px_rgba(0,0,0,0.5)]",
+      "glow": "shadow-[0_0_20px_rgba(37,99,235,0.25)]"
+    },
+    "borders": "border border-white/10",
+    "glassmorphism": "bg-black/60 backdrop-blur-xl border-white/10",
+    "textures": "Use subtle noise overlay opacity-5 mix-blend-overlay if possible."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary hover:bg-primary/90 text-white font-bold uppercase tracking-wider rounded-md h-12 px-8 transition-transform active:scale-95",
+      "secondary": "bg-secondary hover:bg-secondary/80 text-white font-medium rounded-md h-12 px-6",
+      "ghost": "hover:bg-white/10 text-white font-medium rounded-md h-10 px-4"
+    },
+    "cards": {
+      "base": "bg-card text-card-foreground rounded-lg border border-border shadow-sm hover:border-primary/50 transition-colors duration-300",
+      "interactive": "cursor-pointer hover:shadow-glow hover:-translate-y-1 transition-all duration-300"
+    },
+    "inputs": {
+      "base": "bg-input border-transparent focus:border-primary focus:ring-1 focus:ring-primary rounded-md h-12 text-base px-4 placeholder:text-muted-foreground/50"
+    }
+  },
+  "image_assets": {
+    "hero_workout": "https://images.unsplash.com/photo-1758875569284-c57e79ef75e0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwzfHxmaXRuZXNzJTIwd29ya291dCUyMGd5bSUyMHJ1bm5pbmclMjB5b2dhfGVufDB8fHx8MTc3MzcwMDczMnww&ixlib=rb-4.1.0&q=85",
+    "gym_atmosphere": "https://images.unsplash.com/photo-1761971974992-6df33df97c3a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwxfHxmaXRuZXNzJTIwd29ya291dCUyMGd5bSUyMHJ1bm5pbmclMjB5b2dhfGVufDB8fHx8MTc3MzcwMDczMnww&ixlib=rb-4.1.0&q=85",
+    "man_pushups": "https://images.unsplash.com/photo-1764426445448-95103b0024a6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHw0fHxmaXRuZXNzJTIwd29ya291dCUyMGd5bSUyMHJ1bm5pbmclMjB5b2dhfGVufDB8fHx8MTc3MzcwMDczMnww&ixlib=rb-4.1.0&q=85",
+    "food_salad": "https://images.unsplash.com/photo-1607532941433-304659e8198a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHw0fHxoZWFsdGh5JTIwZm9vZCUyMG1lYWwlMjBwcmVwJTIwc2FsYWQlMjBwcm90ZWluJTIwc2hha2V8ZW58MHx8fHwxNzczNzAwNzMzfDA&ixlib=rb-4.1.0&q=85",
+    "food_bowl": "https://images.unsplash.com/photo-1670944316338-40c256cb144e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwZm9vZCUyMG1lYWwlMjBwcmVwJTIwc2FsYWQlMjBwcm90ZWluJTIwc2hha2V8ZW58MHx8fHwxNzczNzAwNzMzfDA&ixlib=rb-4.1.0&q=85",
+    "logo_placeholder": "https://via.placeholder.com/150x50?text=FitTrack"
+  },
+  "motion": {
+    "libraries": ["framer-motion"],
+    "defaults": {
+      "transition": "transition-all duration-300 ease-out",
+      "hover": "hover:scale-[1.02] hover:shadow-lg",
+      "entrance": "animate-in fade-in slide-in-from-bottom-4 duration-500"
+    }
+  },
+  "accessibility": {
+    "contrast": "Ensure text is APCA compliant. Use light text on dark backgrounds.",
+    "focus_states": "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    "reduced_motion": "Respect prefers-reduced-motion media query."
+  },
+  "universal_guidelines": {
+    "general": [
+      "Don't make generic centered layouts.",
+      "Use glass-morphism effects with backdrop filters (12-24px blur).",
+      "NEVER use AI assistant Emojis.",
+      "Every interaction needs micro-animations.",
+      "Use 2-3x more spacing than feels comfortable."
+    ],
+    "components": [
+      "Prioritize using pre-existing components from src/components/ui.",
+      "Components MUST use named exports.",
+      "Pages MUST use default exports.",
+      "Use sonner for toasts."
+    ]
+  },
+  "instructions_to_main_agent": "Implement the 'Performance Pro' aesthetic. Use the provided specific colors and fonts. Do not deviate to generic light mode unless toggled. Build the Dashboard using the Bento Grid strategy. Use the image assets provided for the respective sections. Ensure all interactive elements have data-testid."
+}
